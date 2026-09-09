@@ -1,0 +1,28 @@
+# Raspored — web verzija za iPhone (PWA)
+
+Ista aplikacija kao Android verzija (Danas, Tjedan, Uredi, Predmeti, Postavke; ispiti, zadaće, jednokratne promjene, praznici, "U torbu" s prognozom, izvoz/uvoz), napravljena kao web-aplikacija koja se na iPhoneu dodaje na početni zaslon i radi offline. Podaci su u istom JSON formatu, pa `raspored-4c.json` iz Android verzije radi i ovdje.
+
+Što web verzija na iOS-u **ne može**: obavijesti u pozadini (podsjetnici za ispite) i widgete. Za to treba nativna aplikacija.
+
+## Objava preko GitHub Pages (besplatno, bez računala)
+
+1. Na GitHubu napravi novi **javni** repozitorij, npr. `raspored-web`.
+2. Uploadaj sve datoteke iz ove mape u korijen repozitorija: `index.html`, `app.js`, `styles.css`, `manifest.webmanifest`, `sw.js` i mapu `icons`.
+3. U repozitoriju otvori **Settings → Pages**. Pod *Build and deployment* odaberi **Source: Deploy from a branch**, granu `main` i mapu `/ (root)`, pa **Save**.
+4. Nakon minute-dvije adresa je `https://TVOJE-IME.github.io/raspored-web/` (piše i na toj stranici).
+
+Svaki novi commit automatski objavi novu verziju; aplikacija na telefonu je pokupi pri sljedećem otvaranju s internetom.
+
+## Dodavanje na iPhone
+
+1. Otvori adresu u **Safariju** (ne u Chromeu — samo Safari može dodati web-aplikaciju).
+2. Gumb **Dijeli** (kvadrat sa strelicom) → **Dodaj na početni zaslon** → **Dodaj**.
+3. Otvori ikonu Raspored s početnog zaslona. Radi bez adresne trake, offline, u svijetlom i tamnom načinu.
+4. Postavke → Podaci → **Uvoz** i odaberi `raspored-4c.json` (prethodno spremljen u aplikaciju Datoteke / iCloud Drive).
+
+## Napomene
+
+- Podaci se čuvaju u Safariju za tu web-aplikaciju. Ako je izbrišeš s početnog zaslona, podaci se brišu — zato ih povremeno **izvezi** (Postavke → Podaci → Izvoz otvara iOS izbornik za dijeljenje, spremi u Datoteke).
+- Zaključavanje uređivanja, "U torbu" (uključujući logiku danas/sutra po smjeni), praznici i jednokratne promjene rade jednako kao na Androidu.
+- Prognoza dolazi s Open-Meteo bez računa; radi samo uz internet, ostatak aplikacije radi offline.
+- Ako promijeniš `app.js` ili `styles.css`, u `sw.js` povećaj `raspored-v1` na `v2` da telefoni sigurno preuzmu novu verziju.
