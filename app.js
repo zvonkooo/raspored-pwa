@@ -170,11 +170,15 @@ function applyTheme() {
   document.documentElement.style.setProperty('--tint', colorHex(D.settings.accent));
   const n = parseInt(colorHex(D.settings.accent).slice(1), 16);
   document.documentElement.style.setProperty('--tint-soft', `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${isDark() ? 0.3 : 0.16})`);
-  // Boja statusne trake (sat, baterija) prati pozadinu aplikacije, inače su bijele ikone na svijetloj traci.
+  // Boja statusne trake (sat, baterija) prati pozadinu aplikacije. Chrome na Androidu ponekad
+  // reagira samo na novi <meta> element, pa se on svaki put zamijeni, a color-scheme daje boju ikona.
+  const dark = isDark();
+  document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
   requestAnimationFrame(() => {
-    const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || (isDark() ? '#000000' : '#f2f2f7');
-    const meta = document.getElementById('theme-color'); if (meta) meta.setAttribute('content', bg);
-    const apple = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]'); if (apple) apple.setAttribute('content', isDark() ? 'black-translucent' : 'default');
+    const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || (dark ? '#000000' : '#f2f2f7');
+    document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.remove());
+    const meta = document.createElement('meta'); meta.name = 'theme-color'; meta.content = bg; document.head.append(meta);
+    const apple = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]'); if (apple) apple.setAttribute('content', dark ? 'black-translucent' : 'default');
   });
 }
 
