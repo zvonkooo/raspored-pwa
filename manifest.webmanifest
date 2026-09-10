@@ -9,7 +9,7 @@
   "orientation": "portrait",
   "categories": ["education", "productivity"],
   "background_color": "#141218",
-  "theme_color": "#141218",
+  "theme_color": "#534AB7",
   "lang": "hr",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
