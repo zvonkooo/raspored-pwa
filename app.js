@@ -402,9 +402,16 @@ function renderSettings(main) {
       el('div', { class: 'row' }, el('button', { class: 'destructive', onclick: () => { if (confirm('Vratiti zadane podatke? Sve uneseno se briše.')) { D = defaultData(); save(); } } }, 'Vrati zadane podatke'))),
     el('div', { class: 'note' }, 'Podaci se čuvaju u Safariju na ovom uređaju. Izvezi ih povremeno u Datoteke/iCloud Drive kao sigurnosnu kopiju.'));
 
+  if (!isStandalone()) {
+    const g = el('div', { class: 'group' });
+    if (installPrompt) g.append(el('div', { class: 'row' }, el('div', { class: 'grow' }, el('div', { class: 'label' }, 'Instaliraj na telefon'), el('div', { class: 'detail' }, 'Ikona na početnom zaslonu, radi offline')), el('button', { class: 'pill-btn', onclick: async () => { installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; render(); } }, 'Instaliraj')));
+    else if (IS_IOS) g.append(el('div', { class: 'row' }, el('div', { class: 'grow' }, el('div', { class: 'label' }, 'Dodaj na početni zaslon'), el('div', { class: 'detail' }, 'U Safariju: Dijeli → Dodaj na početni zaslon'))));
+    else g.append(el('div', { class: 'row' }, el('div', { class: 'grow' }, el('div', { class: 'label' }, 'Instaliraj na telefon'), el('div', { class: 'detail' }, 'U Chromeu: izbornik ⋮ → Dodaj na početni zaslon / Instaliraj aplikaciju'))));
+    main.append(el('div', { class: 'group-title' }, 'Instalacija'), g);
+  }
   main.append(el('div', { class: 'group-title' }, 'O aplikaciji'),
     el('div', { class: 'group' },
-      el('div', { class: 'row' }, el('div', { class: 'grow' }, el('div', { class: 'label' }, 'Raspored (web) 2.0'), el('div', { class: 'detail' }, 'Podsjetnici i widgeti nisu dostupni u web verziji na iPhoneu; za njih koristi Android aplikaciju.')))));
+      el('div', { class: 'row' }, el('div', { class: 'grow' }, el('div', { class: 'label' }, 'Raspored (web) 2.0'), el('div', { class: 'detail' }, IS_ANDROID ? 'Web verzija nema podsjetnike ni widgete — za njih instaliraj APK verziju. Podaci se sele izvozom/uvozom.' : 'Podsjetnici i widgeti nisu dostupni u web verziji na iPhoneu.')))));
 }
 
 /* ---------- Sheet (donji panel) ---------- */
@@ -663,6 +670,15 @@ function importFile(file) {
   r.onload = () => { try { D = normalize(JSON.parse(r.result)); save(); toast('Podaci uvezeni'); } catch { toast('Datoteka nije u ispravnom formatu'); } };
   r.readAsText(file);
 }
+
+/* ---------- Platforma i instalacija ---------- */
+const IS_ANDROID = /Android/i.test(navigator.userAgent);
+const IS_IOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+if (IS_ANDROID) document.documentElement.dataset.platform = 'android';
+let installPrompt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; if (tab === 'settings') render(); });
+window.addEventListener('appinstalled', () => { installPrompt = null; toast('Aplikacija je instalirana'); if (tab === 'settings') render(); });
+const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 
 /* ---------- Start ---------- */
 applyTheme();

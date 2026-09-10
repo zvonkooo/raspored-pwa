@@ -167,3 +167,55 @@ main { padding: 4px 16px 16px; }
 
 .toast { position: fixed; left: 50%; bottom: calc(80px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 20px; font-size: 15px; z-index: 30; }
 [hidden] { display: none !important; }
+
+/* ===================== Android (Material 3) ===================== */
+:root[data-platform="android"] {
+  --bg: #fdf8fd; --card: #ffffff; --card2: #f3edf7; --text: #1d1b20; --text2: #49454f; --text3: #6f6a75;
+  --sep: rgba(121, 116, 126, 0.25); --tabbar-bg: #f3edf7; --radius: 16px;
+  --holiday: rgba(255, 184, 77, 0.28); --holiday-text: #6e4a00;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-platform="android"]:not([data-theme="light"]) {
+    --bg: #141218; --card: #211f26; --card2: #2b2930; --text: #e6e0e9; --text2: #cac4d0; --text3: #948f99;
+    --sep: rgba(147, 143, 153, 0.3); --tabbar-bg: #211f26; --holiday: rgba(255, 184, 77, 0.22); --holiday-text: #ffcf7a;
+  }
+}
+:root[data-platform="android"][data-theme="dark"] {
+  --bg: #141218; --card: #211f26; --card2: #2b2930; --text: #e6e0e9; --text2: #cac4d0; --text3: #948f99;
+  --sep: rgba(147, 143, 153, 0.3); --tabbar-bg: #211f26; --holiday: rgba(255, 184, 77, 0.22); --holiday-text: #ffcf7a;
+}
+[data-platform="android"] body { font-family: Roboto, "Google Sans", system-ui, sans-serif; font-size: 16px; }
+[data-platform="android"] .nav h1 { font-size: 28px; font-weight: 500; letter-spacing: 0; }
+[data-platform="android"] .nav-sub { font-size: 14px; }
+[data-platform="android"] .icon-btn { background: transparent; color: var(--text2); }
+[data-platform="android"] .pill-btn { border-radius: 20px; background: var(--tint); color: #fff; }
+[data-platform="android"] .group { border-radius: var(--radius); background: var(--card); }
+[data-platform="android"] .group-title { font-size: 14px; font-weight: 500; color: var(--tint); }
+[data-platform="android"] .row + .row::before { border-top: 0; }
+[data-platform="android"] .row { padding: 12px 16px; }
+[data-platform="android"] .row input[type="text"], [data-platform="android"] .row input[type="time"], [data-platform="android"] .row input[type="date"], [data-platform="android"] .row textarea, [data-platform="android"] .row select {
+  background: transparent; border: 1px solid var(--sep); border-radius: 8px; padding: 10px 12px;
+}
+[data-platform="android"] .seg { background: transparent; border: 1px solid var(--sep); border-radius: 20px; padding: 0; overflow: hidden; }
+[data-platform="android"] .seg button { border-radius: 0; padding: 9px 4px; }
+[data-platform="android"] .seg button + button { border-left: 1px solid var(--sep); }
+[data-platform="android"] .seg button.on { background: var(--tint-soft); box-shadow: none; color: var(--text); }
+[data-platform="android"] .chip { border: 1px solid var(--sep); background: transparent; border-radius: 8px; }
+[data-platform="android"] .chip.on { background: var(--tint-soft); color: var(--text); border-color: transparent; }
+[data-platform="android"] .toggle { width: 52px; height: 32px; background: var(--card2); border: 2px solid var(--text3); }
+[data-platform="android"] .toggle::after { width: 16px; height: 16px; top: 6px; left: 6px; background: var(--text3); box-shadow: none; }
+[data-platform="android"] .toggle.on { background: var(--tint); border-color: var(--tint); }
+[data-platform="android"] .toggle.on::after { width: 24px; height: 24px; top: 2px; left: 24px; background: #fff; }
+[data-platform="android"] .lesson { border-radius: var(--radius); }
+[data-platform="android"] .week td.cell { border-radius: 10px; }
+[data-platform="android"] .tabbar { height: 80px; align-items: center; border-top: 0; }
+[data-platform="android"] .tabbar button { font-size: 12px; gap: 4px; }
+[data-platform="android"] .tabbar button svg { padding: 4px 20px; border-radius: 16px; width: 64px; height: 32px; box-sizing: border-box; }
+[data-platform="android"] .tabbar button.on svg { background: var(--tint-soft); }
+[data-platform="android"] .tabbar button.on { color: var(--text); }
+[data-platform="android"] .sheet { border-radius: 28px 28px 0 0; background: var(--card); }
+[data-platform="android"] .sheet .group { background: var(--card2); }
+[data-platform="android"] .actions button { border-radius: 20px; background: transparent; border: 1px solid var(--sep); }
+[data-platform="android"] .actions button.primary { background: var(--tint); border-color: transparent; }
+[data-platform="android"] .check { border-radius: 4px; }
+[data-platform="android"] .toast { border-radius: 4px; }
