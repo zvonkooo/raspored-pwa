@@ -1,4 +1,4 @@
-const CACHE = 'raspored-v2';
+const CACHE = 'raspored-v3';
 const ASSETS = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest', './icons/icon.svg', './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', e => {

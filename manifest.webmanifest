@@ -8,8 +8,8 @@
   "display_override": ["standalone", "minimal-ui"],
   "orientation": "portrait",
   "categories": ["education", "productivity"],
-  "background_color": "#f2f2f7",
-  "theme_color": "#f2f2f7",
+  "background_color": "#141218",
+  "theme_color": "#141218",
   "lang": "hr",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
