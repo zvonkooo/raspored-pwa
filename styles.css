@@ -43,7 +43,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", system-ui, sans-serif;
   font-size: 17px; line-height: 1.35; color: var(--text); background: var(--bg);
   -webkit-font-smoothing: antialiased; overscroll-behavior-y: none;
-  padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
 }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { background: none; border: 0; padding: 0; cursor: pointer; }
@@ -147,7 +147,7 @@ main { padding: 4px 16px 16px; }
 
 /* Sheet */
 .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 20; }
-.sheet { position: fixed; left: 0; right: 0; bottom: 0; max-height: 88vh; overflow: auto; background: var(--bg); border-radius: 14px 14px 0 0; padding: 8px 16px calc(24px + env(safe-area-inset-bottom)); z-index: 21; animation: up .25s ease-out; }
+.sheet { position: fixed; left: 0; right: 0; bottom: 0; max-height: 88vh; max-height: 88dvh; overflow: auto; background: var(--bg); border-radius: 14px 14px 0 0; padding: 8px 16px calc(24px + env(safe-area-inset-bottom)); z-index: 21; animation: up .25s ease-out; }
 @keyframes up { from { transform: translateY(100%); } }
 @media (prefers-reduced-motion: reduce) { .sheet { animation: none; } }
 .sheet .handle { width: 36px; height: 5px; border-radius: 3px; background: var(--sep); margin: 4px auto 12px; }
@@ -185,7 +185,7 @@ main { padding: 4px 16px 16px; }
   --bg: #141218; --card: #211f26; --card2: #2b2930; --text: #e6e0e9; --text2: #cac4d0; --text3: #948f99;
   --sep: rgba(147, 143, 153, 0.3); --tabbar-bg: #211f26; --holiday: rgba(255, 184, 77, 0.22); --holiday-text: #ffcf7a;
 }
-[data-platform="android"] body { font-family: Roboto, "Google Sans", system-ui, sans-serif; font-size: 16px; }
+[data-platform="android"] body { font-family: Roboto, "Google Sans", system-ui, sans-serif; font-size: 16px; padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
 [data-platform="android"] .nav h1 { font-size: 28px; font-weight: 500; letter-spacing: 0; }
 [data-platform="android"] .nav-sub { font-size: 14px; }
 [data-platform="android"] .icon-btn { background: transparent; color: var(--text2); }
